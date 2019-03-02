@@ -2,6 +2,15 @@
 #include "osg/Callback"
 #include "osg/Group"
 
+/*!
+ * \class NodeAccessCallback
+ *
+ * \brief 线程安全的增删改查子节点
+ *		  运行一次后自动析构
+ *
+ * \author 余琦
+ * \date 三月 2019
+ */
 class NodeAccessCallback: public osg::NodeCallback
 {
 public:

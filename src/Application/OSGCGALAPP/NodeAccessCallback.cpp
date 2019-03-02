@@ -3,6 +3,7 @@
 NodeAccessCallback::NodeAccessCallback(osg::Group* parent, Op oper)
 	:mRootNode(parent)
 	,mOpType(oper)
+	,mDirty(false)
 {
 }
 
@@ -12,8 +13,14 @@ NodeAccessCallback::~NodeAccessCallback()
 
 bool NodeAccessCallback::run(osg::Object* object, osg::Object* data)
 {
-	if (object == mRootNode.get())
+	if (mDirty)
 	{
+		mRootNode->removeUpdateCallback(this);
+		return true;
+	}
+	if (object == mRootNode.get() && !mDirty)
+	{
+
 		switch (mOpType)
 		{
 			case ADD:
@@ -34,11 +41,9 @@ bool NodeAccessCallback::run(osg::Object* object, osg::Object* data)
 				break;
 			}
 		}
+		mDirty = true;
 	}
-	bool val = osg::NodeCallback::run(object, data);
-	//remove callback from parent
-	mRootNode->removeUpdateCallback(this);
-	return val;
+	return osg::NodeCallback::run(object, data);
 }
 
 void NodeAccessCallback::setOpNode(osg::Node *node)
