@@ -16,5 +16,6 @@
         <file>images/inRangDataRemove.png</file>
         <file>images/layerBarChart.png</file>
         <file>images/openProject.png</file>
+        <file>images/delete.png</file>
     </qresource>
 </RCC>

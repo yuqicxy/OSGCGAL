@@ -25,6 +25,8 @@ public:
 
 	void clearChild();
 
+	osg::ref_ptr<osg::Group> GetRootNode() { return mRootNode; }
+
 protected:
 	osg::ref_ptr<osg::Group> mRootNode;
 	QTimer _timer;

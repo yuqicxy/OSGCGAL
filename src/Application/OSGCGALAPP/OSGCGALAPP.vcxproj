@@ -199,21 +199,34 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BuildAction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="NodeAccessCallback.cpp" />
     <ClCompile Include="osgQtWidget.cpp" />
+    <ClCompile Include="ProjectWidget.cpp" />
     <ClCompile Include="ViewerWidget.cpp" />
+    <ClCompile Include="Workbench.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainwindow.h">
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Workbench.h" />
+    <QtMoc Include="BuilderAction.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;$(SolutionDir)include\RibbonBar;.\debug;\include;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtOpenGL</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;$(SolutionDir)include\RibbonBar;.\release;\include;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtOpenGL</IncludePath>
+    </QtMoc>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="NodeAccessCallback.h" />
     <ClInclude Include="osgQtWidget.h" />
+    <QtMoc Include="ProjectWidget.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;$(SolutionDir)include\RibbonBar;.\debug;\include;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtOpenGL</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;$(SolutionDir)include\RibbonBar;.\release;\include;$(QTDIR)\mkspecs\win32-msvc;$(QTDIR)\include\QtOpenGL</IncludePath>
+    </QtMoc>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="ViewerWidget.h" />
   </ItemGroup>
   <ItemGroup>

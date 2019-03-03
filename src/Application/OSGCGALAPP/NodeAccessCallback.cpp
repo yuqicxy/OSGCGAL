@@ -20,7 +20,6 @@ bool NodeAccessCallback::run(osg::Object* object, osg::Object* data)
 	}
 	if (object == mRootNode.get() && !mDirty)
 	{
-
 		switch (mOpType)
 		{
 			case ADD:
