@@ -13,6 +13,8 @@ class ViewerWidget : public QWidget, public osgViewer::CompositeViewer
 public:
 	ViewerWidget(QWidget* parent = 0, Qt::WindowFlags f = 0, osgViewer::ViewerBase::ThreadingModel threadingModel = osgViewer::CompositeViewer::SingleThreaded);
 
+	virtual ~ViewerWidget();
+
 	QWidget* addViewWidget(GraphicsWindowQt* gw, osg::ref_ptr<osg::Node> scene);
 
 	GraphicsWindowQt* createGraphicsWindow(int x, int y, int w, int h, const std::string& name = "", bool windowDecoration = false);

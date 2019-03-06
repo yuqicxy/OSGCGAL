@@ -2,15 +2,16 @@
 #include "QFileDialog"
 #include "QToolBar"
 #include "QMenu"
-#include "mainwindow.h"
+#include "OSGAPP.h"
 #include "Workbench.h"
 #include "ViewerWidget.h"
 #include "ProjectWidget.h"
 #include "QTreeWidgetItem"
+#include <string>
 
 template<> BuilderAction* Singleton<BuilderAction>::mSingleton = 0;
 
-BuilderAction::BuilderAction(MainWindow *parent)
+BuilderAction::BuilderAction(OSGAPP *parent)
 	:QObject(parent)
 {
 	mMainWindow = parent;
@@ -66,7 +67,8 @@ void BuilderAction::OpenModelAction()
 	if (path.isEmpty())
 		return;
 
-	osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(path.toLocal8Bit().toStdString());
+	std::string fileName = "F:\\OSGCGAL\\Data\\axes.osgt";// path.toStdString();
+	osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName);
 	
 	QFileInfo info(path);
 	QString name = info.baseName();

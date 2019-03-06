@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "OSGAPP.h"
 #include <QApplication>
 
 #include <QCommandLineParser>
@@ -17,8 +17,7 @@ int main(int argc, char *argv[])
 	QCoreApplication::setApplicationVersion(QT_VERSION_STR);
 
 	app.setApplicationName(QApplication::tr("osgCGAL"));
-    MainWindow w;
+	OSGAPP w;
     w.show();
-
     return app.exec();
 }

@@ -2,27 +2,27 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "ui_OSGAPP.h"
 
-#include "SARibbonBar.h"
 class ViewerWidget;
 
-namespace Ui {
-class MainWindow;
-}
+//namespace Ui {
+//	class OSGAPP;
+//}
 
 class BuilderAction;
 class ProjectWidget;
 class Workbench;
 
-class MainWindow : public QMainWindow
+class OSGAPP : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+	explicit OSGAPP(QWidget *parent = nullptr);
 
-    ~MainWindow();
-	
+	~OSGAPP();
+
 	//ViewerWidget* GetViewWidget();
 
 //private Q_SLOTS:
@@ -39,7 +39,8 @@ private:
 	void readSettings();
 
 private:
-	Ui::MainWindow					*ui;
+	Ui::OSGAPP						*ui;
+	ViewerWidget					*mViewWidget;
 	std::unique_ptr<BuilderAction>	mBuilderAction;
 	std::unique_ptr<Workbench>		mWorkbench;
 };

@@ -1,5 +1,4 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "OSGAPP.h"
 #include "ViewerWidget.h"
 #include "QAction"
 #include "QIcon"
@@ -9,12 +8,12 @@
 #include "ProjectWidget.h"
 #include "Workbench.h"
 
-MainWindow::MainWindow(QWidget *parent):
-    QMainWindow(parent),
-	ui(new Ui::MainWindow)
+OSGAPP::OSGAPP(QWidget *parent) :
+	QMainWindow(parent),
+	ui(new Ui::OSGAPP)
 {
 	ui->setupUi(this);
-	//mViewWidget = new ViewerWidget;
+	//mViewWidget = new ViewerWidget(this);
 	//setCentralWidget(mViewWidget);
 
 	//remove default toobar
@@ -24,18 +23,18 @@ MainWindow::MainWindow(QWidget *parent):
 		// This does not delete the tool bar.
 		removeToolBar(tb);
 	}
-	
+
 	mBuilderAction.reset(new BuilderAction(this));
 	mWorkbench.reset(new Workbench(this));
-	
-	setCentralWidget(Workbench::getSingleton().GetViewerWidget());
+
+	//setCentralWidget(mViewWidget);
+	setCentralWidget(Workbench::getSingletonPtr()->GetViewerWidget());
 	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, Workbench::getSingleton().GetProjectWidget());
-	//createActions();
 }
 
-MainWindow::~MainWindow()
+OSGAPP::~OSGAPP()
 {
-    delete ui;
+	delete ui;
 }
 
 //void MainWindow::createActions()
@@ -61,12 +60,12 @@ MainWindow::~MainWindow()
 //	fileToolBar->addAction(saveAsAct);
 //}
 
-void MainWindow::createStatusBar()
+void OSGAPP::createStatusBar()
 {
 
 }
 
-void MainWindow::readSettings()
+void OSGAPP::readSettings()
 {
 
 }

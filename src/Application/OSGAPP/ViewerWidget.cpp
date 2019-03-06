@@ -36,6 +36,10 @@ ViewerWidget::ViewerWidget(QWidget* parent /*= 0*/, Qt::WindowFlags f /*= 0*/,
 	_timer.start(10);
 }
 
+ViewerWidget::~ViewerWidget()
+{
+}
+
 QWidget* ViewerWidget::addViewWidget(GraphicsWindowQt* gw, osg::ref_ptr<osg::Node> scene)
 {
 	osgViewer::View* view = new osgViewer::View;
@@ -83,7 +87,7 @@ GraphicsWindowQt* ViewerWidget::createGraphicsWindow(int x, int y, int w, int h,
 	traits->sampleBuffers = ds->getMultiSamples();
 	traits->samples = ds->getNumMultiSamples();
 
-	return new GraphicsWindowQt(traits.get());
+	return new GraphicsWindowQt(traits.get()/*,this*/);
 }
 
 void ViewerWidget::paintEvent(QPaintEvent* /*event*/)

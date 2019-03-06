@@ -2,7 +2,7 @@
 #include "Singleton.h"
 #include "QAction"
 
-class MainWindow;
+class OSGAPP;
 class QToolBar;
 class QMenu;
 
@@ -10,7 +10,7 @@ class BuilderAction : public QObject,public Singleton<BuilderAction>
 {
 	Q_OBJECT
 public:
-	BuilderAction(MainWindow *mParent);
+	BuilderAction(OSGAPP *mParent);
 	virtual ~BuilderAction();
 
 private slots:
@@ -31,5 +31,5 @@ public:
 	QMenu*	mFileMenu;
 
 private:
-	MainWindow *mMainWindow;
+	OSGAPP *mMainWindow;
 };
