@@ -1,4 +1,21 @@
 <RCC>
-    <qresource prefix="OSGAPP">
+    <qresource prefix="/ToolTipIcon">
+        <file>images/copy.png</file>
+        <file>images/cut.png</file>
+        <file>images/new.png</file>
+        <file>images/open.png</file>
+        <file>images/paste.png</file>
+        <file>images/save.png</file>
+        <file>images/app.ico</file>
+        <file>images/chartDataManager.png</file>
+        <file>images/figureIcon.png</file>
+        <file>images/filter.png</file>
+        <file>images/folder.png</file>
+        <file>images/Graph-add.png</file>
+        <file>images/information.png</file>
+        <file>images/inRangDataRemove.png</file>
+        <file>images/layerBarChart.png</file>
+        <file>images/openProject.png</file>
+        <file>images/delete.png</file>
     </qresource>
 </RCC>

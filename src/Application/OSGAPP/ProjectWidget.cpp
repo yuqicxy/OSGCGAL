@@ -76,6 +76,10 @@ std::map<QString, osg::ref_ptr<osg::Node>> ProjectWidget::FindItemByName(const Q
 void ProjectWidget::PrepareMenu(const QPoint & pos)
 {
 	QTreeWidgetItem *item = mTreeWidget->itemAt(pos);
+
+	if (item == nullptr)
+		return;
+
 	mTreeWidget->setCurrentItem(item);
 
 	QMenu menu(this);

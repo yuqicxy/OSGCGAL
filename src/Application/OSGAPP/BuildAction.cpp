@@ -67,7 +67,7 @@ void BuilderAction::OpenModelAction()
 	if (path.isEmpty())
 		return;
 
-	std::string fileName = "F:\\OSGCGAL\\Data\\axes.osgt";// path.toStdString();
+	std::string fileName = path.toStdString();
 	osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName);
 	
 	QFileInfo info(path);

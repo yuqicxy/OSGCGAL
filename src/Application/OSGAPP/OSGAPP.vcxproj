@@ -132,9 +132,6 @@
     <QtMoc Include="OSGAPP.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="OSGAPP.qrc" />
-  </ItemGroup>
-  <ItemGroup>
     <QtUic Include="OSGAPP.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +144,7 @@
     <ClInclude Include="NodeAccessCallback.h" />
     <ClInclude Include="NodeIOBlock.h" />
     <ClInclude Include="osgQtWidget.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="ViewerWidget.h" />
     <ClInclude Include="Workbench.h" />
@@ -162,6 +160,15 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtWidgets;D:\CGALInstall\include;F:\OpenSceneGraph\OpenSceneGraph-3.6.3\include</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtOpenGLExtensions;$(QTDIR)\include\QtWidgets</IncludePath>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OSGAPP.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="OSGAPP.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
