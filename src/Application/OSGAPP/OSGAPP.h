@@ -2,8 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "ui_OSGAPP.h"
+#include "SARibbonMainWindow.h"
 
+class SARibbonCategory;
+class SARibbonContextCategory;
+class QTextEdit;
 class ViewerWidget;
 
 //namespace Ui {
@@ -14,24 +17,14 @@ class BuilderAction;
 class ProjectWidget;
 class Workbench;
 
-class OSGAPP : public QMainWindow
+class OSGAPP : public SARibbonMainWindow
 {
 	Q_OBJECT
 
 public:
 	explicit OSGAPP(QWidget *parent = nullptr);
 
-	~OSGAPP();
-
-	//ViewerWidget* GetViewWidget();
-
-//private Q_SLOTS:
-	//void OpenModel();
-	//void SaveAsModel();
-
-Q_SIGNALS:
-	//void AddStaticModel(osg::ref_ptr<osg::Node> node);
-	//void RemoveStaticModel(osg::ref_ptr<osg::Node> node);
+	virtual ~OSGAPP();
 
 private:
 	//void createActions();
@@ -39,7 +32,6 @@ private:
 	void readSettings();
 
 private:
-	Ui::OSGAPP						*ui;
 	ViewerWidget					*mViewWidget;
 	std::unique_ptr<BuilderAction>	mBuilderAction;
 	std::unique_ptr<Workbench>		mWorkbench;

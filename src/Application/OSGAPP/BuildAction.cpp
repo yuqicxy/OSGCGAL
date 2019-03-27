@@ -58,7 +58,7 @@ void BuilderAction::InitToolBar()
 	mMainWindow->addToolBar(mFileToolbar);
 
 	mFileMenu = new QMenu(tr("&File"));
-	mMainWindow->menuBar()->addMenu(mFileMenu);
+	//mMainWindow->menuBar()->addMenu(mFileMenu);
 }
 
 void BuilderAction::OpenModelAction()
