@@ -120,6 +120,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico" />
+    <Image Include="images\app.ico" />
   </ItemGroup>
 </Project>

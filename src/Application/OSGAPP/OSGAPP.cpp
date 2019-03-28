@@ -26,7 +26,8 @@ OSGAPP::OSGAPP(QWidget *parent) :
 	//	// This does not delete the tool bar.
 	//	removeToolBar(tb);
 	//}
-
+	setWindowTitle(tr("OSGCGAL"));
+	setWindowIcon(QIcon(":/ToolTipIcon/images/app.ico"));
 	SARibbonBar* ribbon = ribbonBar();
 	QFont f = ribbon->font();
 	f.setFamily("Î¢ÈíÑÅºÚ");
@@ -42,10 +43,11 @@ OSGAPP::OSGAPP(QWidget *parent) :
 	setCentralWidget(Workbench::getSingletonPtr()->GetViewerWidget());
 	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, Workbench::getSingleton().GetProjectWidget());
 	
-	ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/icon/chartDataManager.png"), "action1", this));
-	ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/icon/figureIcon.png"), "action2", this));
-	ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/icon/information.png"), "action3", this));
-	ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/icon/inRangDataRemove.png"), "action4", this));
+	ribbon->quickAccessBar()->setVisible(false);
+	//ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/icon/chartDataManager.png"), "action1", this));
+	//ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/icon/figureIcon.png"), "action2", this));
+	//ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/icon/information.png"), "action3", this));
+	//ribbon->quickAccessBar()->addButton(new QAction(QIcon(":/icon/icon/inRangDataRemove.png"), "action4", this));
 
 	showMaximized();
 }
