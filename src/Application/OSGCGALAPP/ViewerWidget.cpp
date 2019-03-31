@@ -6,6 +6,7 @@
 ViewerWidget::ViewerWidget(QWidget* parent /*= 0*/, Qt::WindowFlags f /*= 0*/, 
 	osgViewer::ViewerBase::ThreadingModel threadingModel /*= osgViewer::CompositeViewer::SingleThreaded*/) 
 	:QWidget(parent, f)
+	,mParent(parent)
 {
 	setThreadingModel(threadingModel);
 
@@ -83,7 +84,7 @@ GraphicsWindowQt* ViewerWidget::createGraphicsWindow(int x, int y, int w, int h,
 	traits->sampleBuffers = ds->getMultiSamples();
 	traits->samples = ds->getNumMultiSamples();
 
-	return new GraphicsWindowQt(traits.get());
+	return new GraphicsWindowQt(traits.get(),mParent);
 }
 
 void ViewerWidget::paintEvent(QPaintEvent* /*event*/)

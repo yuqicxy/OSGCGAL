@@ -1,10 +1,15 @@
-#include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "ViewerWidget.h"
+
+#include "mainwindow.h"
 #include "QAction"
 #include "QIcon"
 #include "QMenu"
 #include "QFileDialog"
+#include "QDockWidget"
+
+#include "Workbench.h"
+#include "BuilderAction.h"
+#include "ViewerWidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,6 +28,12 @@ MainWindow::MainWindow(QWidget *parent) :
 	}
 	
 	createActions();
+
+	//mBuilderAction.reset(new BuilderAction(this));
+	//
+	//mWorkbench.reset(new Workbench(this));
+	//
+	//addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, Workbench::getSingletonPtr()->GetProjectDockWidget());
 }
 
 MainWindow::~MainWindow()

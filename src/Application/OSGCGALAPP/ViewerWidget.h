@@ -28,4 +28,5 @@ public:
 protected:
 	osg::ref_ptr<osg::Group> mRootNode;
 	QTimer _timer;
+	QWidget *mParent;
 };

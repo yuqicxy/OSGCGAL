@@ -5,6 +5,9 @@
 #include "SARibbonBar.h"
 
 class ViewerWidget;
+class BuilderAction;
+//class ProjectWidget;
+class Workbench;
 
 namespace Ui {
 class MainWindow;
@@ -13,7 +16,6 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -33,6 +35,8 @@ private:
 
 private:
 	Ui::MainWindow *ui;
+	std::unique_ptr<Workbench>		mWorkbench;
+	std::unique_ptr<BuilderAction>	mBuilderAction;
 };
 
 #endif // MAINWINDOW_H
