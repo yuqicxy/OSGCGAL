@@ -16,19 +16,7 @@ ViewerWidget::ViewerWidget(QWidget* parent /*= 0*/, Qt::WindowFlags f /*= 0*/,
 	mRootNode = new osg::Group;
 
 	QWidget* widget1 = addViewWidget(createGraphicsWindow(0, 0, 200, 200), mRootNode);
-	//QWidget* widget1 = addViewWidget(createGraphicsWindow(0, 0, 100, 100), osgDB::readRefNodeFile("F:\\OSGCGAL\\OSGCGAL\\Data\\cow.osgt"));
-	//QWidget* widget2 = addViewWidget(createGraphicsWindow(0, 0, 100, 100), osgDB::readRefNodeFile("F:\\OSGCGAL\\OSGCGAL\\Data\\glider.osgt"));
-	//QWidget* widget3 = addViewWidget(createGraphicsWindow(0, 0, 100, 100), osgDB::readRefNodeFile("F:\\OSGCGAL\\OSGCGAL\\Data\\axes.osgt"));
-	//QWidget* widget4 = addViewWidget(createGraphicsWindow(0, 0, 100, 100), osgDB::readRefNodeFile("F:\\OSGCGAL\\OSGCGAL\\Data\\fountain.osgt"));
-	//QWidget* popupWidget = addViewWidget(createGraphicsWindow(900, 100, 320, 240, "Popup window", true), osgDB::readRefNodeFile("dumptruck.osgt"));
-	//popupWidget->show();
 
-	//QGridLayout* grid = new QGridLayout;
-	//grid->addWidget(widget1, 0, 0);
-	//grid->addWidget(widget2, 0, 1);
-	//grid->addWidget(widget3, 1, 0);
-	//grid->addWidget(widget4, 1, 1);
-	//setLayout(grid);
 	QVBoxLayout *vLayout = new QVBoxLayout;
 	vLayout->addWidget(widget1);
 	setLayout(vLayout);
