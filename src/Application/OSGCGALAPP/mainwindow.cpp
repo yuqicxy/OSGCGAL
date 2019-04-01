@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ribbon->quickAccessBar()->setVisible(false);
 
 	SARibbonCategory* categoryMain = ribbon->addCategoryPage(QStringLiteral("Main"));
-	SARibbonCategory* categoryOther = ribbon->addCategoryPage(QStringLiteral("Other"));	
+	//SARibbonCategory* categoryOther = ribbon->addCategoryPage(QStringLiteral("Other"));	
 
 	mBuilderAction.reset(new BuilderAction(this));
 	//
