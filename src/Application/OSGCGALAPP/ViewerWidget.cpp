@@ -7,6 +7,7 @@ ViewerWidget::ViewerWidget(QWidget* parent /*= 0*/, Qt::WindowFlags f /*= 0*/,
 	osgViewer::ViewerBase::ThreadingModel threadingModel /*= osgViewer::CompositeViewer::SingleThreaded*/) 
 	:QWidget(parent, f)
 {
+	QWidget::setMinimumSize(QSize(300,300));
 	setThreadingModel(threadingModel);
 
 	// disable the default setting of viewer.done() by pressing Escape.
@@ -36,7 +37,7 @@ ViewerWidget::ViewerWidget(QWidget* parent /*= 0*/, Qt::WindowFlags f /*= 0*/,
 	_timer.start(10);
 }
 
-QWidget* ViewerWidget::addViewWidget(GraphicsWindowQt* gw, osg::ref_ptr<osg::Node> scene)
+QWidget* ViewerWidget::addViewWidget(osgQt::GraphicsWindowQt* gw, osg::ref_ptr<osg::Node> scene)
 {
 	osgViewer::View* view = new osgViewer::View;
 	//view->getDisplaySettings()->setVertexBufferHint(osg::DisplaySettings::VERTEX_ARRAY_OBJECT);	
@@ -66,7 +67,7 @@ QWidget* ViewerWidget::addViewWidget(GraphicsWindowQt* gw, osg::ref_ptr<osg::Nod
 	return gw->getGLWidget();
 }
 
-GraphicsWindowQt* ViewerWidget::createGraphicsWindow(int x, int y, int w, int h, 
+osgQt::GraphicsWindowQt* ViewerWidget::createGraphicsWindow(int x, int y, int w, int h, 
 	const std::string& name /*= ""*/, bool windowDecoration /*= false*/)
 {
 	osg::DisplaySettings* ds = osg::DisplaySettings::instance().get();
@@ -83,7 +84,7 @@ GraphicsWindowQt* ViewerWidget::createGraphicsWindow(int x, int y, int w, int h,
 	traits->sampleBuffers = ds->getMultiSamples();
 	traits->samples = ds->getNumMultiSamples();
 
-	return new GraphicsWindowQt(traits.get());
+	return new osgQt::GraphicsWindowQt(traits.get());
 }
 
 void ViewerWidget::paintEvent(QPaintEvent* /*event*/)

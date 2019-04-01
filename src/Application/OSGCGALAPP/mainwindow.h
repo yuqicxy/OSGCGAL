@@ -3,17 +3,19 @@
 
 #include <QMainWindow>
 #include "SARibbonBar.h"
-
+#include "SARibbonMainWindow.h"
 class ViewerWidget;
+class BuilderAction;
+//class ProjectWidget;
+class Workbench;
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public SARibbonMainWindow
 {
     Q_OBJECT
-
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -21,7 +23,6 @@ public:
 private Q_SLOTS:
 	void OpenModel();
 	void SaveAsModel();
-
 
 private:
 	void createActions();
@@ -32,7 +33,8 @@ private:
 	ViewerWidget *mViewWidget;
 
 private:
-	Ui::MainWindow *ui;
+	std::unique_ptr<Workbench>		mWorkbench;
+	std::unique_ptr<BuilderAction>	mBuilderAction;
 };
 
 #endif // MAINWINDOW_H

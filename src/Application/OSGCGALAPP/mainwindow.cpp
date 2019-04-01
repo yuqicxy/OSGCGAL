@@ -1,33 +1,48 @@
-#include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "ViewerWidget.h"
+
+#include "mainwindow.h"
 #include "QAction"
 #include "QIcon"
 #include "QMenu"
 #include "QFileDialog"
+#include "QDockWidget"
+
+#include "Workbench.h"
+#include "BuilderAction.h"
+#include "ViewerWidget.h"
+
+#include "SARibbonBar.h"
+#include "SARibbonQuickAccessBar.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-	ui(new Ui::MainWindow)
+    SARibbonMainWindow(parent)//,
+	//ui(new Ui::MainWindow)
 {
-	ui->setupUi(this);
-	mViewWidget = new ViewerWidget;
-	setCentralWidget(mViewWidget);
+	//ui->setupUi(this);
+	//mViewWidget = new ViewerWidget;
+	//setCentralWidget(mViewWidget);	
+	//createActions();
 
-	//remove default toobar
-	QList<QToolBar *> allToolBars = findChildren<QToolBar *>();
-	foreach(QToolBar *tb, allToolBars)
-	{
-		// This does not delete the tool bar.
-		removeToolBar(tb);
-	}
-	
-	createActions();
+	SARibbonBar* ribbon = ribbonBar();
+	QFont font("Times");
+	ribbon->setFont(font);
+	ribbon->applitionButton()->setText(QStringLiteral("File"));
+	ribbon->quickAccessBar()->setVisible(false);
+
+	SARibbonCategory* categoryMain = ribbon->addCategoryPage(QStringLiteral("Main"));
+	SARibbonCategory* categoryOther = ribbon->addCategoryPage(QStringLiteral("Other"));	
+
+	mBuilderAction.reset(new BuilderAction(this));
+	//
+	mWorkbench.reset(new Workbench(this));
+	setCentralWidget(mWorkbench->GetViewerWidget());
+	//
+	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, Workbench::getSingletonPtr()->GetProjectDockWidget());
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    //delete ui;
 }
 
 void MainWindow::createActions()
