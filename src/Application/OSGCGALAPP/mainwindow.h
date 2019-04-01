@@ -24,7 +24,6 @@ private Q_SLOTS:
 	void OpenModel();
 	void SaveAsModel();
 
-
 private:
 	void createActions();
 	void createStatusBar();

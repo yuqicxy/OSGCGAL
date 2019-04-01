@@ -46,9 +46,6 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="osgQtWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ViewerWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -79,9 +76,6 @@
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="osgQtWidget.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ViewerWidget.h">
       <Filter>Header Files</Filter>

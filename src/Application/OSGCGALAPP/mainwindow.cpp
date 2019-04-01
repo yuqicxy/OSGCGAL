@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
-	mViewWidget = new ViewerWidget;
-	setCentralWidget(mViewWidget);
+	//mViewWidget = new ViewerWidget;
+	//setCentralWidget(mViewWidget);
 
 	//remove default toobar
 	QList<QToolBar *> allToolBars = findChildren<QToolBar *>();
@@ -27,13 +27,14 @@ MainWindow::MainWindow(QWidget *parent) :
 		removeToolBar(tb);
 	}
 	
-	createActions();
+	//createActions();
 
-	//mBuilderAction.reset(new BuilderAction(this));
+	mBuilderAction.reset(new BuilderAction(this));
 	//
-	//mWorkbench.reset(new Workbench(this));
+	mWorkbench.reset(new Workbench(this));
+	setCentralWidget(mWorkbench->GetViewerWidget());
 	//
-	//addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, Workbench::getSingletonPtr()->GetProjectDockWidget());
+	addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, Workbench::getSingletonPtr()->GetProjectDockWidget());
 }
 
 MainWindow::~MainWindow()
