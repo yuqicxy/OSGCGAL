@@ -33,7 +33,6 @@ private:
 	ViewerWidget *mViewWidget;
 
 private:
-	//Ui::MainWindow *ui;
 	std::unique_ptr<Workbench>		mWorkbench;
 	std::unique_ptr<BuilderAction>	mBuilderAction;
 };

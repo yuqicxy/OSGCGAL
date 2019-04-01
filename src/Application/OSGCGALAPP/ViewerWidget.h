@@ -1,7 +1,7 @@
 #pragma once
+#include <osgQt/GraphicsWindowQt>
 #include "QGridLayout"
 #include "QTimer"
-#include <osgQt/GraphicsWindowQt>
 #include <osgDB/ReadFile>
 #include <osgViewer/CompositeViewer>
 #include <osgViewer/Viewer>
@@ -28,5 +28,4 @@ public:
 protected:
 	osg::ref_ptr<osg::Group> mRootNode;
 	QTimer _timer;
-	QWidget *mParent;
 };
