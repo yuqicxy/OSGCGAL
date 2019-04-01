@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "SARibbonBar.h"
-
+#include "SARibbonMainWindow.h"
 class ViewerWidget;
 class BuilderAction;
 //class ProjectWidget;
@@ -13,7 +13,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public SARibbonMainWindow
 {
     Q_OBJECT
 public:
@@ -33,7 +33,7 @@ private:
 	ViewerWidget *mViewWidget;
 
 private:
-	Ui::MainWindow *ui;
+	//Ui::MainWindow *ui;
 	std::unique_ptr<Workbench>		mWorkbench;
 	std::unique_ptr<BuilderAction>	mBuilderAction;
 };

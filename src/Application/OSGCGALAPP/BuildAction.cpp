@@ -16,7 +16,7 @@ BuilderAction::BuilderAction(MainWindow *parent)
 	:QObject(parent)
 {
 	mMainWindow = parent;
-	InitToolBar();
+	//InitToolBar();
 	InitAction();
 }
 
@@ -27,24 +27,24 @@ BuilderAction::~BuilderAction()
 
 void BuilderAction::InitAction()
 {
-	assert(mFileToolbar);
-	assert(mFileMenu);
+	//assert(mFileToolbar);
+	//assert(mFileMenu);
 
 	const QIcon newIcon = QIcon::fromTheme(tr("openModel"), QIcon(":/ToolTipIcon/images/open.png"));
 	mOpenModelAction = new QAction(newIcon, tr("Open"), this);
 	mOpenModelAction->setShortcuts(QKeySequence::New);
 	mOpenModelAction->setStatusTip(tr("open a new model"));
 	connect(mOpenModelAction, SIGNAL(triggered()), this, SLOT(OpenModelAction()));
-	mFileToolbar->addAction(mOpenModelAction);
-	mFileMenu->addAction(mOpenModelAction);
+	//mFileToolbar->addAction(mOpenModelAction);
+	//mFileMenu->addAction(mOpenModelAction);
 
 	const QIcon saveAsIcon = QIcon::fromTheme(tr("save-as"), QIcon(":/ToolTipIcon/images/save.png"));
 	mSaveAsAction = new QAction(saveAsIcon, tr("Save As"));
 	mSaveAsAction->setShortcuts(QKeySequence::SaveAs);
 	mSaveAsAction->setStatusTip(tr("Save the Model"));
 	connect(mSaveAsAction, SIGNAL(triggered()), this, SLOT(SaveAsAction()));
-	mFileToolbar->addAction(mSaveAsAction);
-	mFileMenu->addAction(mSaveAsAction);
+	//mFileToolbar->addAction(mSaveAsAction);
+	//mFileMenu->addAction(mSaveAsAction);
 
 	const QIcon deleteIcon = QIcon::fromTheme("delete Model", QIcon(":/ToolTipIcon/images/delete.png"));
 	mRemoveModelAction = new QAction(deleteIcon, tr("Delete Model"));

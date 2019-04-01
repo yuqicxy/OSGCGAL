@@ -11,23 +11,26 @@
 #include "BuilderAction.h"
 #include "ViewerWidget.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-	ui(new Ui::MainWindow)
-{
-	ui->setupUi(this);
-	//mViewWidget = new ViewerWidget;
-	//setCentralWidget(mViewWidget);
+#include "SARibbonBar.h"
+#include "SARibbonQuickAccessBar.h"
 
-	//remove default toobar
-	QList<QToolBar *> allToolBars = findChildren<QToolBar *>();
-	foreach(QToolBar *tb, allToolBars)
-	{
-		// This does not delete the tool bar.
-		removeToolBar(tb);
-	}
-	
+MainWindow::MainWindow(QWidget *parent) :
+    SARibbonMainWindow(parent)//,
+	//ui(new Ui::MainWindow)
+{
+	//ui->setupUi(this);
+	//mViewWidget = new ViewerWidget;
+	//setCentralWidget(mViewWidget);	
 	//createActions();
+
+	SARibbonBar* ribbon = ribbonBar();
+	QFont font("Times");
+	ribbon->setFont(font);
+	ribbon->applitionButton()->setText(QStringLiteral("File"));
+	ribbon->quickAccessBar()->setVisible(false);
+
+	SARibbonCategory* categoryMain = ribbon->addCategoryPage(QStringLiteral("Main"));
+	SARibbonCategory* categoryOther = ribbon->addCategoryPage(QStringLiteral("Other"));	
 
 	mBuilderAction.reset(new BuilderAction(this));
 	//
@@ -39,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    //delete ui;
 }
 
 void MainWindow::createActions()
