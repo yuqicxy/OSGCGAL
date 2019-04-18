@@ -17,12 +17,18 @@ private slots:
 	void SaveAsAction();
 	void OpenModelAction();
 	void DeleteModelAction();
+	void AddObliqueDataAction();
 
 private:
 	void InitAction();
 	void InitToolBar();
 
+private:
+	void AddModelByFileName(const QString &fileName);
+
+
 public:
+	QAction *mAddObliqueDataAction;
 	QAction *mOpenModelAction;
 	QAction *mRemoveModelAction;
 	QAction *mSaveAsAction;

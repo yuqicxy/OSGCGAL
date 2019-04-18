@@ -4,10 +4,11 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
+#include "osg/Notify"
+
 #ifndef VERSION_STR
 	#define VERSION_STR "1.0.0"
 #endif // VERSION_STR
-
 
 int main(int argc, char *argv[])
 {
@@ -20,5 +21,8 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
+#if CGALAPP_DEBUG
+	osg::setNotifyLevel(osg::NotifySeverity::INFO);
+#endif
     return app.exec();
 }

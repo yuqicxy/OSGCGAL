@@ -89,6 +89,7 @@ void ProjectWidget::PrepareMenu(const QPoint & pos)
 	{
 	case ItemType::ROOT:
 		menu.addAction(BuilderAction::getSingleton().mOpenModelAction);
+		menu.addAction(BuilderAction::getSingleton().mAddObliqueDataAction);
 		break;
 	case ItemType::MODEL:
 		menu.addAction(BuilderAction::getSingleton().mRemoveModelAction);

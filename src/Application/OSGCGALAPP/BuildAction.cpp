@@ -2,7 +2,11 @@
 #include "QFileDialog"
 #include "QToolBar"
 #include "QMenu"
+#include "QDir"
 #include <string>
+
+#include <osg/PagedLOD>
+#include <osgDB/WriteFile>
 
 #include "Workbench.h"
 #include "ViewerWidget.h"
@@ -38,6 +42,10 @@ void BuilderAction::InitAction()
 	//mFileToolbar->addAction(mOpenModelAction);
 	//mFileMenu->addAction(mOpenModelAction);
 
+	mAddObliqueDataAction = new QAction(tr("Add Oblique Data"), this);
+	mOpenModelAction->setStatusTip(tr("Open and Arrange a Oblique Dataset"));
+	connect(mAddObliqueDataAction, SIGNAL(triggered()), this, SLOT(AddObliqueDataAction()));
+
 	const QIcon saveAsIcon = QIcon::fromTheme(tr("save-as"), QIcon(":/ToolTipIcon/images/save.png"));
 	mSaveAsAction = new QAction(saveAsIcon, tr("Save As"));
 	mSaveAsAction->setShortcuts(QKeySequence::SaveAs);
@@ -64,11 +72,11 @@ void BuilderAction::InitToolBar()
 
 void BuilderAction::OpenModelAction()
 {
-	QString path = QFileDialog::getOpenFileName(nullptr, tr("Open Model"), "", "model(*.osg *.osgt *.obj *.osgb)");
+	QString path = QFileDialog::getOpenFileName(nullptr, tr("Open Model"), "", "model(*.osg *.osgt *.obj *.osgb *.ive);ALL(*.*)");
 	if (path.isEmpty())
 		return;
 
-	std::string fileName = path.toStdString();
+	std::string fileName = path.toLocal8Bit().toStdString();
 	osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName);
 	
 	QFileInfo info(path);
@@ -95,4 +103,63 @@ void BuilderAction::DeleteModelAction()
 	if(map.size() > 0)
 		Workbench::getSingletonPtr()->GetViewerWidget()->removeChild(map[itemName]);
 	Workbench::getSingletonPtr()->GetProjectWidget()->RemoveItem(item);
+}
+
+void BuilderAction::AddObliqueDataAction()
+{
+	QString dirStr = QFileDialog::getExistingDirectory(nullptr, tr("Open Oblique Dataset Directory"),"../",
+		QFileDialog::ShowDirsOnly|QFileDialog::DontResolveSymlinks);
+
+	QDir dir(dirStr);
+	if (dir.exists())
+	{
+		dir.setFilter(QDir::AllDirs | QDir::NoDotAndDotDot);
+		osg::ref_ptr<osg::PagedLOD> lod = new osg::PagedLOD;
+		unsigned int childIndex = 0;
+		for (QFileInfo info : dir.entryInfoList())
+		{
+			QString fileBaseName = info.baseName();
+			QString osgbFileName = info.absoluteFilePath() + "/" + fileBaseName + ".osgb";
+			QFileInfo osgbfileInfo(osgbFileName);
+
+			if (osgbfileInfo.exists())
+			{
+				std::string fileName = osgbFileName.toLocal8Bit().toStdString();
+				lod->setFileName(childIndex++, fileName);
+				osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName);
+				if(!node.valid())
+					osg::notify(osg::WARN) << fileName<< "\t is invalid node" << std::endl;
+				std::string relativeFileName = fileName.substr(dirStr.size() + 1,fileName.size());
+				lod->addChild(node, 0, 1e10, relativeFileName);
+				
+			}
+			else
+			{
+				osg::notify(osg::WARN) << "Open\t" << osgbFileName.toLocal8Bit().toStdString() << "\t fail" << std::endl;
+			}
+		}
+		if (lod->getNumFileNames() > 0)
+		{
+			std::string dirStdStr = dirStr.toLocal8Bit().toStdString();
+			size_t pos = dirStdStr.find_last_of("\ //");
+			dirStdStr = dirStdStr.substr(0, pos);
+			osgDB::writeNodeFile(*lod, dirStdStr +"//index.osg");
+			AddModelByFileName(QString::fromLocal8Bit((dirStdStr +"//index.osg").c_str()));
+		}
+	}
+}
+
+void BuilderAction::AddModelByFileName(const QString &fileName)
+{
+	QFileInfo info(fileName);
+	QString name = info.baseName();
+	std::map<QString, osg::ref_ptr<osg::Node>> map = Workbench::getSingletonPtr()->GetProjectWidget()->FindItemByName(name);
+	if (map.size() > 0)
+	{
+		name = name + QString("(%1)").arg(map.size());
+	}
+	osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName.toLocal8Bit().toStdString());
+	Workbench::getSingletonPtr()->GetViewerWidget()->addChild(node);
+	node->setName(name.toStdString());
+	Workbench::getSingletonPtr()->GetProjectWidget()->AddModelItem(name, node, info.filePath());
 }

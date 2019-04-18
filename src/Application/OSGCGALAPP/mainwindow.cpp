@@ -14,7 +14,8 @@
 #include "SARibbonBar.h"
 #include "SARibbonQuickAccessBar.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+
+MainWindow::MainWindow(QWidget *parent):
     SARibbonMainWindow(parent)//,
 	//ui(new Ui::MainWindow)
 {
