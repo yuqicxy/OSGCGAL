@@ -9,6 +9,8 @@
 #include "Workbench.h"
 #include "ViewerWidget.h"
 
+#include "CGALUtility.h"
+
 ProjectWidget::ProjectWidget(QWidget *parent)
 	:QDockWidget(parent)
 {
@@ -19,7 +21,7 @@ ProjectWidget::ProjectWidget(QWidget *parent)
 	mRootItem->setText(0,tr("Root"));
 	mRootItem->setData(0, Qt::UserRole, ItemType::ROOT);
 	/*mNameNodeMap["Root"] = Workbench::getSingletonPtr()->GetViewerWidget()->GetRootNode();*/
-	mNameNodeMap["Root"] = nullptr;
+	//mNameNodeItemMap["Root"] = nullptr;
 
 	mTreeWidget->addTopLevelItem(mRootItem);
 	setWidget(mTreeWidget);
@@ -28,6 +30,9 @@ ProjectWidget::ProjectWidget(QWidget *parent)
 
 	connect(mTreeWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
 		this, SLOT(PrepareMenu(const QPoint&)));
+
+	connect(mTreeWidget, SIGNAL(itemClicked(QTreeWidgetItem *item, int column)),
+		this, SLOT(itemClickedSLOT(QTreeWidgetItem *item, int column)));
 }
 
 ProjectWidget::~ProjectWidget()
@@ -47,32 +52,58 @@ void ProjectWidget::AddModelItem(const QString& name,
 	item->setStatusTip(0,statusTip);
 	item->setToolTip(0, statusTip);
 	item->setText(0, name);
-	item->setData(0, Qt::UserRole, MODEL);
+	item->setData(0, TypeRole, MODEL);
+	QString guid = QString::fromLocal8Bit(GenerateGUID().c_str());
+	item->setData(0, GUIDRole, guid);
 	GetCurrentItem()->addChild(item);
 	GetCurrentItem()->setExpanded(true);
 
-	mNameNodeMap[name] = node;
+	Workbench::getSingletonPtr()->GetViewerWidget()->addChild(node);
+	NodeItem nodeitem{ node,item };
+	mNameNodeItemMap[guid] = nodeitem;
 }
 
 void ProjectWidget::RemoveItem(QTreeWidgetItem *item)
 {
-	mNameNodeMap.erase(item->text(0));
-	item->parent()->removeChild(item);
+	NodeItemMap::const_iterator itr;
+	itr = mNameNodeItemMap.find(item->data(0, GUIDRole).toString());
+	if (itr != mNameNodeItemMap.end())
+	{
+		Workbench::getSingletonPtr()->GetViewerWidget()->removeChild(itr->second.node);
+		item->parent()->removeChild(item);
+		mNameNodeItemMap.erase(itr);
+	}
 }
 
-std::map<QString, osg::ref_ptr<osg::Node>> ProjectWidget::FindItemByName(const QString &name)
+void ProjectWidget::RemoveItemByGUID(QString guid)
 {
-	QRegExp reg(QString("^") + name);
-	std::map<QString,osg::ref_ptr<osg::Node>> map;
-	for (std::map<QString,osg::ref_ptr<osg::Node>>::const_iterator itr = mNameNodeMap.begin();
-		itr != mNameNodeMap.cend(); ++itr)
+	QTreeWidgetItem *item = FindItemByGUID(guid);
+	if (item != nullptr)
 	{
-		if (reg.exactMatch(itr->first))
-		{
-			map[itr->first]= itr->second;
-		}
+		RemoveItem(item);
 	}
-	return map;
+}
+
+osg::ref_ptr<osg::Node> ProjectWidget::FindNodeByGUID(const QString &guid)
+{
+	NodeItemMap::const_iterator itr;
+	itr = mNameNodeItemMap.find(guid);
+	if (itr != mNameNodeItemMap.cend())
+	{
+		return itr->second.node;
+	}
+	return nullptr;
+}
+
+QTreeWidgetItem* ProjectWidget::FindItemByGUID(const QString &guid)
+{
+	NodeItemMap::const_iterator itr;
+	itr = mNameNodeItemMap.find(guid);
+	if (itr != mNameNodeItemMap.cend())
+	{
+		return itr->second.item;
+	}
+	return nullptr;
 }
 
 void ProjectWidget::PrepareMenu(const QPoint & pos)
@@ -85,7 +116,7 @@ void ProjectWidget::PrepareMenu(const QPoint & pos)
 	mTreeWidget->setCurrentItem(item);
 
 	QMenu menu(this);
-	switch (item->data(0,Qt::UserRole).toUInt())
+	switch (item->data(0,TypeRole).toUInt())
 	{
 	case ItemType::ROOT:
 		menu.addAction(BuilderAction::getSingleton().mOpenModelAction);
@@ -100,4 +131,8 @@ void ProjectWidget::PrepareMenu(const QPoint & pos)
 
 	QPoint pt(pos);
 	menu.exec(mTreeWidget->mapToGlobal(pos));
+}
+
+void ProjectWidget::itemClickedSLOT(QTreeWidgetItem *item, int column)
+{
 }

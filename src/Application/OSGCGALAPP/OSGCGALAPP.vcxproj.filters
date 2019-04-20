@@ -61,6 +61,9 @@
     <ClCompile Include="ProjectWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CGALUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainwindow.h">
@@ -90,6 +93,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="Workbench.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CGALUtility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

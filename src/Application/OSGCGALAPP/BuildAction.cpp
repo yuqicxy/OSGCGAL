@@ -81,13 +81,6 @@ void BuilderAction::OpenModelAction()
 	
 	QFileInfo info(path);
 	QString name = info.baseName();
-	std::map<QString, osg::ref_ptr<osg::Node>> map = Workbench::getSingletonPtr()->GetProjectWidget()->FindItemByName(name);
-	if (map.size() > 0)
-	{
-		name = name + QString("(%1)").arg(map.size());
-	}
-	Workbench::getSingletonPtr()->GetViewerWidget()->addChild(node);
-	node->setName(name.toStdString());
 	Workbench::getSingletonPtr()->GetProjectWidget()->AddModelItem(name,node,info.filePath());
 }
 
@@ -98,10 +91,6 @@ void BuilderAction::SaveAsAction()
 void BuilderAction::DeleteModelAction()
 {
 	QTreeWidgetItem *item = Workbench::getSingletonPtr()->GetProjectWidget()->GetCurrentItem();
-	QString itemName = item->text(0);
-	std::map<QString, osg::ref_ptr<osg::Node>> map = Workbench::getSingletonPtr()->GetProjectWidget()->FindItemByName(itemName);
-	if(map.size() > 0)
-		Workbench::getSingletonPtr()->GetViewerWidget()->removeChild(map[itemName]);
 	Workbench::getSingletonPtr()->GetProjectWidget()->RemoveItem(item);
 }
 
@@ -131,7 +120,6 @@ void BuilderAction::AddObliqueDataAction()
 					osg::notify(osg::WARN) << fileName<< "\t is invalid node" << std::endl;
 				std::string relativeFileName = fileName.substr(dirStr.size() + 1,fileName.size());
 				lod->addChild(node, 0, 1e10, relativeFileName);
-				
 			}
 			else
 			{
@@ -141,7 +129,7 @@ void BuilderAction::AddObliqueDataAction()
 		if (lod->getNumFileNames() > 0)
 		{
 			std::string dirStdStr = dirStr.toLocal8Bit().toStdString();
-			size_t pos = dirStdStr.find_last_of("\ //");
+			size_t pos = dirStdStr.find_last_of("\\ //");
 			dirStdStr = dirStdStr.substr(0, pos);
 			osgDB::writeNodeFile(*lod, dirStdStr +"//index.osg");
 			AddModelByFileName(QString::fromLocal8Bit((dirStdStr +"//index.osg").c_str()));
@@ -153,13 +141,6 @@ void BuilderAction::AddModelByFileName(const QString &fileName)
 {
 	QFileInfo info(fileName);
 	QString name = info.baseName();
-	std::map<QString, osg::ref_ptr<osg::Node>> map = Workbench::getSingletonPtr()->GetProjectWidget()->FindItemByName(name);
-	if (map.size() > 0)
-	{
-		name = name + QString("(%1)").arg(map.size());
-	}
 	osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName.toLocal8Bit().toStdString());
-	Workbench::getSingletonPtr()->GetViewerWidget()->addChild(node);
-	node->setName(name.toStdString());
 	Workbench::getSingletonPtr()->GetProjectWidget()->AddModelItem(name, node, info.filePath());
 }

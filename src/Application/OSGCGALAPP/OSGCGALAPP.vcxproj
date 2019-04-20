@@ -66,11 +66,11 @@
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>F:\OpenSceneGraph\OpenSceneGraph-3.6.3\include;D:\CGALInstall\include;$(IncludePath)</IncludePath>
+    <IncludePath>F:\OpenSceneGraph\OpenSceneGraph-3.6.3\include;D:\CGALInstall\include;F:\Boost\1_69_0;$(IncludePath)</IncludePath>
     <LibraryPath>D:\CGALInstall\lib;F:\OpenSceneGraph\OpenSceneGraph-3.6.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>F:\OpenSceneGraph\OpenSceneGraph-3.6.3\include;D:\CGALInstall\include;$(IncludePath)</IncludePath>
+    <IncludePath>F:\OpenSceneGraph\OpenSceneGraph-3.6.3\include;D:\CGALInstall\include;F:\Boost\1_69_0;$(IncludePath)</IncludePath>
     <LibraryPath>D:\CGALInstall\lib;F:\OpenSceneGraph\OpenSceneGraph-3.6.3\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -200,6 +200,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BuildAction.cpp" />
+    <ClCompile Include="CGALUtility.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="NodeAccessCallback.cpp" />
@@ -213,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BuilderAction.h" />
+    <ClInclude Include="CGALUtility.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="NodeAccessCallback.h" />
     <QtMoc Include="ProjectWidget.h" />
