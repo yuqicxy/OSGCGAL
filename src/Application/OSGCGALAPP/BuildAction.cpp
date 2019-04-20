@@ -61,6 +61,11 @@ void BuilderAction::InitAction()
 	mRemoveModelAction->setShortcuts(QKeySequence::Delete);
 	mRemoveModelAction->setStatusTip(tr("Delete the Model"));
 	connect(mRemoveModelAction, SIGNAL(triggered()), this, SLOT(DeleteModelAction()));
+
+	mLightOnOff = new QAction(tr("Light On/Off"));
+	mLightOnOff->setStatusTip(tr("Open/Close Light Effect"));
+	mLightOnOff->setCheckable(true);
+	connect(mLightOnOff, SIGNAL(triggered(bool)), this, SLOT(OpenCloseLight(bool)));
 }
 
 void BuilderAction::InitToolBar()
@@ -146,4 +151,9 @@ void BuilderAction::AddModelByFileName(const QString &fileName)
 	QString name = info.baseName();
 	osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName.toLocal8Bit().toStdString());
 	Workbench::getSingletonPtr()->GetProjectWidget()->AddModelItem(name, node, info.filePath());
+}
+
+void BuilderAction::OpenCloseLight(bool state)
+{
+	Workbench::getSingletonPtr()->GetViewerWidget()->lightOnOff(state);
 }

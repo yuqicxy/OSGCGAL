@@ -99,3 +99,11 @@ void ViewerWidget::clearChild()
 	osg::ref_ptr<NodeAccessCallback> callback = new NodeAccessCallback(mRootNode, NodeAccessCallback::CLEAR);
 	mRootNode->addUpdateCallback(callback);
 }
+
+void ViewerWidget::lightOnOff(bool state)
+{
+	if(state)
+		getView(0)->getCamera()->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::ON);
+	else
+		getView(0)->getCamera()->getOrCreateStateSet()->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+}

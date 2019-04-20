@@ -89,9 +89,6 @@
     <ClInclude Include="NodeAccessCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource1.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="Workbench.h">
       <Filter>Header Files</Filter>
     </ClInclude>

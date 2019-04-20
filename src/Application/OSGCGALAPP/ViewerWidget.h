@@ -25,6 +25,7 @@ public:
 
 	void clearChild();
 
+	void lightOnOff(bool);
 protected:
 	osg::ref_ptr<osg::Group> mRootNode;
 	QTimer _timer;

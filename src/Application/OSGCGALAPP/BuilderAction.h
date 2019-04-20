@@ -14,6 +14,7 @@ public:
 	virtual ~BuilderAction();
 
 private slots:
+	void OpenCloseLight(bool);
 	void SaveAsAction();
 	void OpenModelAction();
 	void DeleteModelAction();
@@ -27,13 +28,16 @@ private:
 	void AddModelByFileName(const QString &fileName);
 
 public:
-	QAction *mAddObliqueDataAction;
-	QAction *mOpenModelAction;
-	QAction *mRemoveModelAction;
-	QAction *mSaveAsAction;
 	QToolBar *mFileToolbar;
 	QMenu*	mFileMenu;
 
 private:
 	MainWindow *mMainWindow;
+
+public:
+	QAction *mAddObliqueDataAction;
+	QAction *mOpenModelAction;
+	QAction *mRemoveModelAction;
+	QAction *mSaveAsAction;
+	QAction *mLightOnOff;
 };

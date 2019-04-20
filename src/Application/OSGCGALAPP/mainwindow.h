@@ -22,7 +22,7 @@ public:
 private:
 	void createStatusBar();
 	void readSettings();
-
+	void InitRibbon();
 private:
 	ViewerWidget *mViewWidget;
 
