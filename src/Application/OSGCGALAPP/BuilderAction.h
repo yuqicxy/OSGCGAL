@@ -26,7 +26,6 @@ private:
 private:
 	void AddModelByFileName(const QString &fileName);
 
-
 public:
 	QAction *mAddObliqueDataAction;
 	QAction *mOpenModelAction;

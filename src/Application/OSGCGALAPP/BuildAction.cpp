@@ -14,6 +14,8 @@
 #include "QTreeWidgetItem"
 #include "MainWindow.h"
 
+#include "CGALUtility.h"
+
 template<> BuilderAction* Singleton<BuilderAction>::mSingleton = 0;
 
 BuilderAction::BuilderAction(MainWindow *parent)
@@ -77,8 +79,9 @@ void BuilderAction::OpenModelAction()
 		return;
 
 	std::string fileName = path.toLocal8Bit().toStdString();
-	osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName);
-	
+	osg::ref_ptr<osg::Node> node = OSGCGAL::ReadNodeFile(fileName);
+	if (!node.valid())
+		return;
 	QFileInfo info(path);
 	QString name = info.baseName();
 	Workbench::getSingletonPtr()->GetProjectWidget()->AddModelItem(name,node,info.filePath());
@@ -115,7 +118,7 @@ void BuilderAction::AddObliqueDataAction()
 			{
 				std::string fileName = osgbFileName.toLocal8Bit().toStdString();
 				lod->setFileName(childIndex++, fileName);
-				osg::ref_ptr<osg::Node> node = osgDB::readRefNodeFile(fileName);
+				osg::ref_ptr<osg::Node> node = OSGCGAL::ReadNodeFile(fileName);
 				if(!node.valid())
 					osg::notify(osg::WARN) << fileName<< "\t is invalid node" << std::endl;
 				std::string relativeFileName = fileName.substr(dirStr.size() + 1,fileName.size());

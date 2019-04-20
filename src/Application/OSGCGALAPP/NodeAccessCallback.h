@@ -1,6 +1,16 @@
 #pragma once
 #include "osg/Callback"
 #include "osg/Group"
+/*!
+ * \class NodeAccessCallback
+ *
+ *	节点增删同步操作
+ *	
+ * \brief 
+ *
+ * \author 余琦
+ * \date 四月 2019
+ */
 
 class NodeAccessCallback: public osg::NodeCallback
 {

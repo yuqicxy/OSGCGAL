@@ -6,7 +6,6 @@
 #include "SARibbonMainWindow.h"
 class ViewerWidget;
 class BuilderAction;
-//class ProjectWidget;
 class Workbench;
 
 namespace Ui {
@@ -20,12 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private Q_SLOTS:
-	void OpenModel();
-	void SaveAsModel();
-
 private:
-	void createActions();
 	void createStatusBar();
 	void readSettings();
 

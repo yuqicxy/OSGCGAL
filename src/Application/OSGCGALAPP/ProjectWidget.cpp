@@ -53,7 +53,7 @@ void ProjectWidget::AddModelItem(const QString& name,
 	item->setToolTip(0, statusTip);
 	item->setText(0, name);
 	item->setData(0, TypeRole, MODEL);
-	QString guid = QString::fromLocal8Bit(GenerateGUID().c_str());
+	QString guid = QString::fromLocal8Bit(OSGCGAL::GenerateGUID().c_str());
 	item->setData(0, GUIDRole, guid);
 	GetCurrentItem()->addChild(item);
 	GetCurrentItem()->setExpanded(true);

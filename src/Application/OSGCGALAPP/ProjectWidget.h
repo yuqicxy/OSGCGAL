@@ -5,6 +5,16 @@
 class QTreeWidget;
 class QTreeWidgetItem;
 
+/*!
+ * \class ProjectWidget
+ *
+ *	控制OSGCGAL根节点树的增删和显示隐藏
+ *	
+ * \brief 
+ *
+ * \author 余琦
+ * \date 四月 2019
+ */
 class ProjectWidget : public QDockWidget
 {
 	Q_OBJECT
