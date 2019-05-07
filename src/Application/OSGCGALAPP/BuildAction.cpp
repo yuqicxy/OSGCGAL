@@ -139,8 +139,8 @@ void BuilderAction::AddObliqueDataAction()
 			std::string dirStdStr = dirStr.toLocal8Bit().toStdString();
 			size_t pos = dirStdStr.find_last_of("\\ //");
 			dirStdStr = dirStdStr.substr(0, pos);
-			osgDB::writeNodeFile(*lod, dirStdStr +"//index.osg");
-			AddModelByFileName(QString::fromLocal8Bit((dirStdStr +"//index.osg").c_str()));
+			osgDB::writeNodeFile(*lod, dirStdStr +"//index.osgb");
+			AddModelByFileName(QString::fromLocal8Bit((dirStdStr +"//index.osgb").c_str()));
 		}
 	}
 }

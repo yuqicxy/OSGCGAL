@@ -219,6 +219,7 @@
     <ClInclude Include="NodeAccessCallback.h" />
     <QtMoc Include="ProjectWidget.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="ViewerWidget.h" />
     <ClInclude Include="Workbench.h" />
   </ItemGroup>
